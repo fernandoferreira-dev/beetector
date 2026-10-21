@@ -27,3 +27,4 @@
 * Diogo Rocha
 * Fernando Ferreira
 * Jaime Quaresma 
+* Brian Morato
