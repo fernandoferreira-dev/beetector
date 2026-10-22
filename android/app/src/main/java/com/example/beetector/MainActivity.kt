@@ -20,10 +20,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             BeetectorTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    paglog(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
@@ -31,13 +28,17 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun paglog(modifier: Modifier = Modifier) {
+    Column(modifier = modifier) {
+        Text(
+            text = "CERTO! CERTO! CERTO!",
+            modifier = Modifier.padding(16.dp),
+            text = "VOTE FERNANDO ENGENHEIRO!",
+            modifier = Modifier.padding(16.dp),
+        )
+    }
 }
-
+/*
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
@@ -45,3 +46,4 @@ fun GreetingPreview() {
         Greeting("Android")
     }
 }
+*/
