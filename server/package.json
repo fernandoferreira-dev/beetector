@@ -10,6 +10,7 @@
     "dev": "nodemon app.js"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "express": "^5.3.0"
   },
   "devDependencies": {
