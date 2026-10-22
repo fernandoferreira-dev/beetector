@@ -1,7 +1,40 @@
 "use strict";
+const bcrypt = require("bcrypt")
+
 // const mysql = require("mysql2");w
 const options = require("./options.json");
 
+
+const register = async (req, res) => {
+    try {
+        const hashedPassword = await bcrypt.hash(req.body.password, 10)
+        const user = { name: req.body.name, password: hashedPassword }
+        users.push(user)
+        res.status(201).send()
+
+        let connection = mysql.createConnection(options);
+
+        connection.connect();
+
+        let sql = "COUNT WHERE idUser = " + req.params.userId + " FROM hives";
+        connection.query(sql, function (err, rows) {
+            if (err) {
+                res.json({ "Message": "404" });
+            } else {
+                res.json({
+                    "Message": "200",
+                    "person": rows
+                });
+            }
+        });
+
+        connection.end();
+
+    } catch {
+        res.status(500).send()
+    }
+}
+module.exports.register = register;
 
 const getUser = (req, res) => {
     const userId = req.params.userId;
