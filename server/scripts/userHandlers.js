@@ -1,5 +1,5 @@
 "use strict";
-// const mysql = require("mysql2");
+// const mysql = require("mysql2");w
 const options = require("./options.json");
 
 
@@ -19,8 +19,26 @@ const deleteUser = (req, res) => {
 }
 module.exports.deleteUser = deleteUser;
 
+const hiveQuantity = (req, res) => {
+    let connection = mysql.createConnection(options);
 
+    connection.connect();
 
+    let sql = "COUNT WHERE idUser = " + req.params.userId + " FROM hives";
+    connection.query(sql, function (err, rows) {
+        if (err) {
+            res.json({ "Message": "404" });
+        } else {
+            res.json({
+                "Message": "200",
+                "person": rows
+            });
+        }
+    });
+
+    connection.end();
+}
+module.exports.hiveQuantity = hiveQuantity;
 
 const getPeople = (req, res) => {
     let connection = mysql.createConnection(options);

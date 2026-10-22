@@ -11,6 +11,8 @@ router.get("/register", (req, res) => {
     res.send("register")
 })
 
+router.get("/hiveQuantity/:userId", hiveQuantity)
+
 router
     .route("/:userId")
     .get(userHandlers.getUser)
