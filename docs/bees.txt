@@ -18,9 +18,15 @@ A maneira das abelhas avisarem as outras para pararem de realizar uma atividade.
 “waggle sound” https://youtu.be/-7ijI-g4jHg
 Uma danca realizada pelas abelhas para informar as outras acerca da localizacao de comida.
 
-Sinais de swarming.
-da
+Sinais de enxame.
+Quando existe uma quantidade excedente de recursos (como nectar, pollen e mel) dentro das celas da colmeia e pouco espaco para a criacao de crias.
+Quando muito pollen mas pouco mel, uma outra razao para isto acontecer e quando nao ha espaco o suficiente para alojar um influxo de nectar.
+Um enxame nao deve ser prevenido. Um enxame ]e a maneira natural das abelhas reproduzirem e ]e o objetivo natural das colonias.
 
+Rogido de quando uma rainha esta ausente.
+A colmeia faz um zombido especifico na ausencia de uma rainha. https://youtu.be/VlwVxvN1zK0
+
+O som normal de uma colmeia: https://youtu.be/xHPFm46Hyek
 ## BIBLIOGRAFIA
 https://www.mdpi.com/2076-3417/12/8/3920
 https://www.nature.com/articles/s41598-020-66115-5
