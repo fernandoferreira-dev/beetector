@@ -1,14 +1,14 @@
 const express = require("express")
 
 const app = express()
-const port = 3000
-
-const userRouter = require("./routes/users")
+const port = process.env.SERVER_PORT || "undefined"
 
 
-app.use("/users", userRouter)
+/**
+ * @todo ligar o router e as sessões
+ */
 
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+    console.log(`Server started on port ${port}.`)
 })
