@@ -33,17 +33,6 @@ services:
     networks:
       - app-network
 
-  react_native:
-    build:
-      context: ./app
-      dockerfile: Dockerfile
-    container_name: react_native_app
-    restart: unless-stopped
-    ports:
-      - "${MOBILE_PORT}:19000"
-    networks:
-      - app-network
-
 networks:
   app-network:
     driver: bridge
