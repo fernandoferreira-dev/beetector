@@ -1,3 +1,0 @@
-/**
- * @todo register, login, logout
- */
