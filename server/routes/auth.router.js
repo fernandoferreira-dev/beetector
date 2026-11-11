@@ -1,3 +1,0 @@
-/**
- * Escrever o auth router
- */

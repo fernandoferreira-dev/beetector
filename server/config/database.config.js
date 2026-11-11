@@ -1,6 +1,6 @@
-const mariadb = require('mariadb');
+import mariadb from 'mariadb';
+import chalk from 'chalk';
 
-// Cria o pool de conexões usando as variáveis passadas pelo Docker Compose
 const pool = mariadb.createPool({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT || 3306,
@@ -10,8 +10,18 @@ const pool = mariadb.createPool({
     connectionLimit: 5
 });
 
-// Exporta o pool com suporte para async/await
-module.exports = {
-    getConnection: () => pool.getConnection(),
-    query: (sql, params) => pool.query(sql, params)
-};
+async function connectDatabase() {
+    try {
+        const connection = await pool.getConnection();
+        console.log(chalk.green.bold("Database connected successfully!"));
+        await connection.release();
+    } catch (error) {
+        console.log(chalk.red("Database connection failed with error: " + chalk.bold(error.message)));
+        process.exit(1);
+    }
+}
+
+export const getConnection = () => pool.getConnection();
+export const query = (sql, params) => pool.query(sql, params);
+
+export default connectDatabase;
