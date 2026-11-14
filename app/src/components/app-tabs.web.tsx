@@ -7,9 +7,10 @@ import {
     TabListProps,
 } from 'expo-router/ui';
 import { SymbolView } from 'expo-symbols';
-import { Pressable, useColorScheme, View, StyleSheet } from 'react-native';
+import { Pressable, View, StyleSheet } from 'react-native';
 
 import { Colors, MaxContentWidth, Spacing } from '@/constants/theme';
+import { useColorScheme } from '@/hooks/use-color-scheme';
 
 import { ExternalLink } from './external-link';
 import { ThemedText } from './themed-text';
@@ -21,10 +22,10 @@ export default function AppTabs() {
             <TabSlot style={{ height: '100%' }} />
             <TabList asChild>
                 <CustomTabList>
-                    <TabTrigger name="home" href="/" asChild>
+                    <TabTrigger name="home" href="/tabs" asChild>
                         <TabButton>Home</TabButton>
                     </TabTrigger>
-                    <TabTrigger name="explore" href="/explore" asChild>
+                    <TabTrigger name="explore" href="/tabs/explore" asChild>
                         <TabButton>Explore</TabButton>
                     </TabTrigger>
                 </CustomTabList>

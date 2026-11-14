@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'expo-router';
 import { ActivityIndicator, KeyboardAvoidingView, Platform, Pressable, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -107,6 +108,12 @@ export default function LoginScreen() {
                         className="h-[52px] items-center justify-center rounded-xl border border-[#aaa] active:opacity-70">
                         <Text className="text-base font-semibold text-[#806c0b]">Criar conta</Text>
                     </Pressable>
+
+                    <Link href="/tabs" asChild>
+                        <Pressable className="mt-3 h-[52px] items-center justify-center rounded-xl border border-[#dedede] active:opacity-70">
+                            <Text className="text-sm font-medium text-[#555]">Ir para a página inicial (teste)</Text>
+                        </Pressable>
+                    </Link>
                 </View>
             </KeyboardAvoidingView>
         </SafeAreaView>
