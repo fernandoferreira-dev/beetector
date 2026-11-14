@@ -12,7 +12,8 @@ export default function RootLayout() {
     return (
         <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
             <AnimatedSplashOverlay />
-            <Stack screenOptions={{ headerShown: false }} /> //para esconder o cabeçario automatico, vamos fazer um proprio
+            {/* Esconde o cabeçalho automático para usar um cabeçalho próprio. */}
+            <Stack screenOptions={{ headerShown: false }} />
         </ThemeProvider>
     );
 }

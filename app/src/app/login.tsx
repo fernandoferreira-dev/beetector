@@ -1,6 +1,10 @@
 import { useState } from 'react';
-import { ActivityIndicator, Image, KeyboardAvoidingView, Platform, Pressable, Text, TextInput, View } from 'react-native';
+import { ActivityIndicator, KeyboardAvoidingView, Platform, Pressable, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+import BeeIcon from '../../assets/images/bee.svg';
+import HiddenIcon from '../../assets/images/hidden.svg';
+import VisibleIcon from '../../assets/images/visible.svg';
 
 export default function LoginScreen() {
     const [email, setEmail] = useState('');
@@ -34,7 +38,7 @@ export default function LoginScreen() {
                 behavior={Platform.OS === 'ios' ? 'padding' : undefined}
                 className="mx-auto flex-1 w-full max-w-[430px] justify-center">
                 <View className="mb-12 flex-row items-center px-1">
-                    <Image source={require('../../assets/images/bee.png')} className="mr-3 h-12 w-12" />
+                    <BeeIcon width={48} height={48} style={{ marginRight: 12 }} />
                     <Text className="text-[28px] font-bold text-[#050505]">Beetector</Text>
                 </View>
 
@@ -69,10 +73,7 @@ export default function LoginScreen() {
                             accessibilityLabel={showPassword ? 'Esconder palavra-passe' : 'Mostrar palavra-passe'}
                             onPress={() => setShowPassword((visible) => !visible)}
                             hitSlop={8}>
-                            <Image
-                                source={showPassword ? require('../../assets/images/visible.png') : require('../../assets/images/hidden.png')}
-                                className="h-[22px] w-[22px]"
-                            />
+                            {showPassword ? <VisibleIcon width={22} height={22} /> : <HiddenIcon width={22} height={22} />}
                         </Pressable>
                     </View>
 
