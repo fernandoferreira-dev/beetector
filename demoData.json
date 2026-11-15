@@ -1,18 +1,14 @@
-{
-    "sensors": [
-        {
-            "id": 1,
-            "name": "Colmeia 1",
-            "type": "Temperatura",
-            "value": 25.5,
-            "unit": "°C"
-        },
-        {
-            "id": 2,
-            "name": "Colmeia 2",
-            "type": "Humidade",
-            "value": 60,
-            "unit": "%"
-        }
-    ]
-}
+[
+  {
+    "sensor_id": "beetectorlora1",
+    "time": "2026-11-12T17:32:03.103Z",
+    "temperature": 25.8,
+    "humidity": 79
+  },
+  {
+    "sensor_id": "beetectorlora1",
+    "time": "2026-11-12T17:45:23.686Z",
+    "temperature": 25.3,
+    "humidity": 68
+  }
+]
