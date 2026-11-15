@@ -41,7 +41,7 @@ create table if not exists hives (
     dev_eui char(16) null unique,
     fw_version_s3 varchar(20),
     fw_version_c6 varchar(20),
-    hive_status enum('ordered', 'shipped', 'active', 'inactive', 'maintenance') default 'ordered',
+    hive_status enum('encomendado', 'preparado', 'ativo', 'inativo', 'em manutenção') default 'encomendado',
     current_state tinyint unsigned null,  
     state_since timestamp null,
     last_reading_at timestamp null,
