@@ -1,0 +1,18 @@
+{
+    "sensors": [
+        {
+            "id": 1,
+            "name": "Colmeia 1",
+            "type": "Temperatura",
+            "value": 25.5,
+            "unit": "°C"
+        },
+        {
+            "id": 2,
+            "name": "Colmeia 2",
+            "type": "Humidade",
+            "value": 60,
+            "unit": "%"
+        }
+    ]
+}
