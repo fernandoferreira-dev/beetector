@@ -14,6 +14,7 @@ interface TtnUplinkBody {
         decoded_payload?: {
             temperature?: number | null;
             humidity?: number | null;
+            bee_count?: number | null;
             sound_dbfs?: number | null;
         };
         rx_metadata?: {
@@ -49,6 +50,7 @@ export const processUplink = async (body: TtnUplinkBody): Promise<UplinkResult> 
         fCnt: up.f_cnt ?? 0, // o TTN omite f_cnt quando é 0
         temperatureC: decoded.temperature ?? null,
         humidityPct: decoded.humidity ?? null,
+        beeCount: decoded.bee_count ?? null,
         audioLevelDb: decoded.sound_dbfs ?? null,
         rssi: rx?.rssi ?? null,
         snr: rx?.snr ?? null,

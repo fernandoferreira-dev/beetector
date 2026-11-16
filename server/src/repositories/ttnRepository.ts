@@ -6,6 +6,7 @@ export interface NewReading {
     fCnt: number;
     temperatureC: number | null;
     humidityPct: number | null;
+    beeCount: number | null;
     audioLevelDb: number | null;
     rssi: number | null;
     snr: number | null;
@@ -29,11 +30,11 @@ export const saveReading = async (r: NewReading): Promise<void> => {
         await conn.query(
             `INSERT IGNORE INTO readings
                (hive_id, received_at, f_cnt, temperature_c, humidity_pct,
-                audio_level_db, rssi, snr, gateway_id)
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                     bee_count, audio_level_db, rssi, snr, gateway_id)
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
             [
-                r.hiveId, r.receivedAt, r.fCnt, r.temperatureC, r.humidityPct,
-                r.audioLevelDb, r.rssi, r.snr, r.gatewayId,
+                     r.hiveId, r.receivedAt, r.fCnt, r.temperatureC, r.humidityPct,
+                     r.beeCount, r.audioLevelDb, r.rssi, r.snr, r.gatewayId,
             ]
         );
 
