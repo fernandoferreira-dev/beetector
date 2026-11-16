@@ -15,6 +15,8 @@ export const uplink = async (req: Request, res: Response) => {
         return;
     }
 
+    console.log('[TTN] Uplink received:', req.body);
+
     try {
         const result = await processUplink(req.body);
 
