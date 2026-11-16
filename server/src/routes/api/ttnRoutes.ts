@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { ttnController } from '../../controllers/ttnController.js';
+import { uplink } from '../../controllers/ttnController.js';
 
 const router = Router();
 
-router.post('/uplink', ttnController.handleUplink);
+router.post('/uplink', uplink);
 
 export default router;
