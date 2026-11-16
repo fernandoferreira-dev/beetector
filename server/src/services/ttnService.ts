@@ -28,7 +28,7 @@ export const processUplink = async (body: TtnUplinkBody): Promise<UplinkResult> 
         fCnt: up.f_cnt ?? 0, // o TTN omite f_cnt quando é 0
         temperatureC: decoded.temperature ?? null,
         humidityPct: decoded.humidity ?? null,
-        beeCount: decoded.bee_count ?? null,
+        beeCount: decoded.bee_count ?? null, 
         audioLevelDb: decoded.sound_dbfs ?? null,
         rssi: rx?.rssi ?? null,
         snr: rx?.snr ?? null,

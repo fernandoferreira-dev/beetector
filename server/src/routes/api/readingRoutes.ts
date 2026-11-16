@@ -1,13 +1,10 @@
 import { Router } from 'express';
-import { getAllReadings, getReading } from '../../controllers/readingsController.js';
+import { getAllReadings, getReading } from '../../controllers/readingController.js';
 
 const router = Router();
 
-router.get('/allReadings', getAllReadings);
-
-router
-    .route("reading/:id")
-    .get(getReading)
+router.get('/', getAllReadings);
+router.get('/:id', getReading);
 
 
 export default router;
