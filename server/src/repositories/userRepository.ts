@@ -1,16 +1,5 @@
 import { pool } from '../config/database.js';
-
-export interface UserEntity {
-    id: number;
-    email: string;
-    passwordHash: string;
-}
-
-interface UserRow {
-    id: number;
-    user_email: string;
-    user_password_hash: string;
-}
+import type { UserEntity, UserRow } from '../types/user.js';
 
 export class UserRepository {
     async findByEmail(email: string): Promise<UserEntity | null> {

@@ -1,29 +1,7 @@
 import { findHiveIdByDevEui, saveReading } from '../repositories/ttnRepository.js';
+import type { TtnUplinkBody, UplinkResult } from '../types/ttn.js';
 
 export class InvalidPayloadError extends Error { }
-
-export type UplinkResult = 'saved' | 'unknown_device';
-
-// Só os campos que usamos do corpo do webhook do TTN
-interface TtnUplinkBody {
-    end_device_ids?: { dev_eui?: string };
-    received_at?: string;
-    uplink_message?: {
-        f_cnt?: number;
-        received_at?: string;
-        decoded_payload?: {
-            temperature?: number | null;
-            humidity?: number | null;
-            bee_count?: number | null;
-            sound_dbfs?: number | null;
-        };
-        rx_metadata?: {
-            rssi?: number;
-            snr?: number;
-            gateway_ids?: { gateway_id?: string };
-        }[];
-    };
-}
 
 export const processUplink = async (body: TtnUplinkBody): Promise<UplinkResult> => {
     const devEui = body?.end_device_ids?.dev_eui;
