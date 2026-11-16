@@ -21,6 +21,7 @@ const options: Options = {
         './src/routes/**/*.ts', // Caso tenhas subpastas dentro de routes
         './dist/routes/*.js',
         './dist/routes/**/*.js',
+        './src/docs/*.{yml,yaml}',
     ],
 };
 

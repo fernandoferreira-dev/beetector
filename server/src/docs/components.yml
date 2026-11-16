@@ -1,0 +1,190 @@
+components:
+  parameters:
+    HiveId:
+      name: hiveId
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+      description: Filter by hive ID.
+    From:
+      name: from
+      in: query
+      schema:
+        type: string
+        format: date-time
+      description: Include readings at or after this timestamp.
+    To:
+      name: to
+      in: query
+      schema:
+        type: string
+        format: date-time
+      description: Include readings at or before this timestamp.
+    Limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 1000
+        default: 100
+      description: Maximum number of readings to return.
+    Offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
+      description: Number of readings to skip.
+
+  schemas:
+    AuthCredentials:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+          example: beekeeper@example.com
+        password:
+          type: string
+          format: password
+          minLength: 1
+          example: secret-password
+    PublicUser:
+      type: object
+      required: [id, email]
+      properties:
+        id:
+          type: integer
+          example: 1
+        email:
+          type: string
+          format: email
+          example: beekeeper@example.com
+    Error:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+          example: Invalid credentials
+    Reading:
+      type: object
+      required: [id, hiveId, receivedAt]
+      properties:
+        id:
+          type: integer
+          example: 42
+        hiveId:
+          type: integer
+          example: 7
+        receivedAt:
+          type: string
+          format: date-time
+        fCnt:
+          type: integer
+          nullable: true
+        temperatureC:
+          type: number
+          nullable: true
+        humidityPct:
+          type: number
+          nullable: true
+        beeCount:
+          type: integer
+          nullable: true
+        audioLevelDb:
+          type: number
+          nullable: true
+        audioFreqHz:
+          type: number
+          nullable: true
+        stateCode:
+          type: integer
+          nullable: true
+        batteryMv:
+          type: integer
+          nullable: true
+        rssi:
+          type: number
+          nullable: true
+        snr:
+          type: number
+          nullable: true
+        gatewayId:
+          type: string
+          nullable: true
+    TtnUplink:
+      type: object
+      required: [end_device_ids, uplink_message]
+      properties:
+        received_at:
+          type: string
+          format: date-time
+        end_device_ids:
+          type: object
+          properties:
+            dev_eui:
+              type: string
+              example: 0004A30B00123456
+        uplink_message:
+          type: object
+          required: [decoded_payload]
+          properties:
+            f_cnt:
+              type: integer
+            received_at:
+              type: string
+              format: date-time
+            decoded_payload:
+              type: object
+              properties:
+                temperature:
+                  type: number
+                  nullable: true
+                humidity:
+                  type: number
+                  nullable: true
+                bee_count:
+                  type: integer
+                  nullable: true
+                sound_dbfs:
+                  type: number
+                  nullable: true
+            rx_metadata:
+              type: array
+              items:
+                type: object
+                properties:
+                  rssi:
+                    type: number
+                  snr:
+                    type: number
+                  gateway_ids:
+                    type: object
+                    properties:
+                      gateway_id:
+                        type: string
+
+  responses:
+    BadRequest:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication or webhook secret failed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
