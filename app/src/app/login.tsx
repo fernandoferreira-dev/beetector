@@ -1,11 +1,40 @@
 import { useState } from 'react';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { ActivityIndicator, KeyboardAvoidingView, Platform, Pressable, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import BeeIcon from '../../assets/images/bee.svg';
 import HiddenIcon from '../../assets/images/hidden.svg';
 import VisibleIcon from '../../assets/images/visible.svg';
+
+interface LoginResponse {
+    user: {
+        id: number;
+        email: string;
+    };
+}
+
+function isLoginResponse(value: unknown): value is LoginResponse {
+    if (typeof value !== 'object' || value === null || !('user' in value)) {
+        return false;
+    }
+
+    const user = value.user;
+    return typeof user === 'object'
+        && user !== null
+        && 'id' in user
+        && typeof user.id === 'number'
+        && 'email' in user
+        && typeof user.email === 'string';
+}
+
+function getApiError(value: unknown): string | null {
+    if (typeof value !== 'object' || value === null || !('error' in value)) {
+        return null;
+    }
+
+    return typeof value.error === 'string' ? value.error : null;
+}
 
 export default function LoginScreen() {
     const [email, setEmail] = useState('');
@@ -16,18 +45,61 @@ export default function LoginScreen() {
     const [showPassword, setShowPassword] = useState(false);
 
     async function handleLogin() {
-        if (!email.includes('@') || password.length < 6) {
+        const normalizedEmail = email.trim();
+        if (!normalizedEmail.includes('@') || password.length < 6) {
             setError('Email inválido ou password com menos de 6 caracteres.');
             return;
         }
+
+        const apiUrl = process.env.EXPO_PUBLIC_API_URL?.trim().replace(/\/+$/, '');
+        if (!apiUrl) {
+            console.log('O URL da API não está configurada.');
+            return;
+        }
+
         setError('');
         setLoading(true);
 
         try {
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-            alert('Login com sucesso!');
-        } catch {
-            setError('Não foi possível entrar. Tenta novamente.');
+            let response: Response;
+            try {
+                response = await fetch(`${apiUrl}/api/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email: normalizedEmail, password }),
+                });
+            } catch {
+                console.log('Não foi possível contactar o servidor. Verifica a ligação e tenta novamente.');
+                return;
+            }
+
+            const responseText = await response.text();
+            let responseBody: unknown = null;
+            if (responseText) {
+                try {
+                    responseBody = JSON.parse(responseText) as unknown;
+                } catch {
+                    throw new Error('O servidor devolveu uma resposta inválida.');
+                }
+            }
+
+            if (!response.ok) {
+                setError(response.status === 401
+                    ? 'Email ou palavra-passe incorretos.'
+                    : getApiError(responseBody) ?? 'Não foi possível iniciar sessão. Tenta novamente.');
+                return;
+            }
+
+            if (!isLoginResponse(responseBody)) {
+                throw new Error('A resposta de login do servidor é inválida.');
+            }
+
+            router.replace('/tabs');
+        } catch (error) {
+            setError(error instanceof Error ? error.message : 'Não foi possível entrar. Tenta novamente.');
         } finally {
             setLoading(false);
         }
