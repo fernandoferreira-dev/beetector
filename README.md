@@ -3,7 +3,6 @@
 
 ## Content
 ```
-.
 ├── app
 │   ├── assets
 │   │   └── images
