@@ -10,6 +10,6 @@ base_url="${BASE_URL:-http://localhost:8080}"
 email="$1"
 password="$2"
 
-curl --include --request POST "$base_url/auth/login" \
+curl --include --request POST "$base_url/api/auth/login" \
     --header 'Content-Type: application/json' \
     --data "{\"email\":\"$email\",\"password\":\"$password\"}"

@@ -37,6 +37,7 @@ export const env = {
     ttnAppId: requiredEnv('TTN_APP_ID'),
     ttnEndDeviceId: requiredEnv('TTN_END_DEVICE_ID'),
     ttnAccessKey: requiredEnv('TTN_ACCESS_KEY'),
+    ttnWebhookSecret: requiredEnv('TTN_WEBHOOK_SECRET'),
 
     googleClientId: optionalEnv('GOOGLE_CLIENT_ID'),
     googleClientSecret: optionalEnv('GOOGLE_CLIENT_SECRET'),
