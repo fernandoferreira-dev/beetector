@@ -13,6 +13,24 @@ export interface NewReading {
     gatewayId: string | null;
 }
 
+export type ReadingRow = Record<string, unknown>;
+
+//função para popular a combobox com ids das colmeias
+export const findHiveIdsWithReadings = async (): Promise<number[]> => {
+    const rows = await pool.query<{ hive_id: number }[]>(
+        'SELECT DISTINCT hive_id FROM readings ORDER BY hive_id'
+    );
+    return rows.map(({ hive_id }) => hive_id);
+};
+
+//função que retorna as readings de uma colmeia específica (hiveId), ordenadas da mais recente para a mais antiga
+export const findReadingsByHiveId = async (hiveId: number): Promise<ReadingRow[]> => {
+    return pool.query<ReadingRow[]>(
+        'SELECT * FROM readings WHERE hive_id = ? ORDER BY received_at DESC, reading_id DESC',
+        [hiveId]
+    );
+};
+
 export const findHiveIdByDevEui = async (devEui: string): Promise<number | null> => {
     const rows = await pool.query<{ hive_id: number }[]>(
         'SELECT hive_id FROM hives WHERE dev_eui = ?',

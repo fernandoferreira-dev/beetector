@@ -1,7 +1,44 @@
-import type { Request, Response } from 'express';
-import { timingSafeEqual } from 'node:crypto';
-import { env } from '../config/env.js';
-import { InvalidPayloadError, processUplink } from '../services/ttnService.js';
+import type { Request, Response } from "express";
+import { timingSafeEqual } from "node:crypto";
+import { env } from "../config/env.js";
+import {
+    findHiveIdsWithReadings,
+    findReadingsByHiveId,
+} from "../repositories/ttnRepository.js";
+import { InvalidPayloadError, processUplink } from "../services/ttnService.js";
+
+export const listReadingHiveIds = async (_req: Request, res: Response) => {
+    try {
+        const hiveIds = await findHiveIdsWithReadings();
+        res.json({ hiveIds });
+    } catch (error) {
+        console.error("ttn - failed to fetch reading hive IDs:", error);
+        res.status(500).json({ error: "failed to fetch reading hive IDs" });
+    }
+};
+
+export const listReadings = async (req: Request, res: Response) => {
+    const rawHiveId = req.query.hive_id;
+    if (typeof rawHiveId !== "string" || !/^[1-9]\d*$/.test(rawHiveId)) {
+        // /^[1-9]\d*$/ expressão para verificar se é um número inteiro positivo 
+        res.status(400).json({ error: "A valid hive_id is required" });
+        return;
+    }
+
+    const hiveId = Number(rawHiveId);
+    if (!Number.isSafeInteger(hiveId)) {
+        res.status(400).json({ error: "A valid hive_id is required" });
+        return;
+    }
+
+    try {
+        const readings = await findReadingsByHiveId(hiveId);
+        res.json({ readings });
+    } catch (error) {
+        console.error("ttn - failed to fetch readings:", error);
+        res.status(500).json({ error: "failed to fetch readings" });
+    }
+};
 
 function secretOk(received: string): boolean {
     const a = Buffer.from(received);
@@ -10,19 +47,19 @@ function secretOk(received: string): boolean {
 }
 
 export const uplink = async (req: Request, res: Response) => {
-    if (!secretOk(req.header('x-webhook-secret') ?? '')) {
-        res.status(401).json({ error: 'Unauthorized' });
+    if (!secretOk(req.header("x-webhook-secret") ?? "")) {
+        res.status(401).json({ error: "Unauthorized" });
         return;
     }
 
-    console.log('[TTN] Uplink received:', req.body);
+    console.log("[TTN] Uplink received:", req.body);
 
     try {
         const result = await processUplink(req.body);
 
-        if (result === 'unknown_device') {
+        if (result === "unknown_device") {
             // 200 para o TTN não repetir o pedido
-            res.status(200).json({ ignored: 'unknown device' });
+            res.status(200).json({ ignored: "unknown device" });
             return;
         }
 
@@ -33,6 +70,6 @@ export const uplink = async (req: Request, res: Response) => {
             return;
         }
         console.error(error);
-        res.status(500).json({ error: 'Server error' });
+        res.status(500).json({ error: "Server error" });
     }
 };
