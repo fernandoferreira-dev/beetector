@@ -11,6 +11,13 @@ export interface TtnUplinkBody {
             humidity?: number | null;
             bee_count?: number | null;
             sound_dbfs?: number | null;
+            state_last?: string | null;
+            state_last_code?: number | null;
+            freq_hz?: number | null;
+
+            // Não utilizado mas possivelmente útil para fins estatisticos
+            state_worst?: string | null;
+            state_worst_code?: number | null
         };
         rx_metadata?: {
             rssi?: number;

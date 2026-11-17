@@ -105,6 +105,10 @@ components:
         stateCode:
           type: integer
           nullable: true
+        stateCodeString:
+          type: string
+          nullable: true
+          example: CALMA
         batteryMv:
           type: integer
           nullable: true

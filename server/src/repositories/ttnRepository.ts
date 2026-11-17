@@ -17,12 +17,14 @@ export const saveReading = async (r: NewReading): Promise<void> => {
 
         await conn.query(
             `INSERT IGNORE INTO readings
-               (hive_id, received_at, f_cnt, temperature_c, humidity_pct,
-                     bee_count, audio_level_db, rssi, snr, gateway_id)
-                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+       (hive_id, received_at, f_cnt, temperature_c, humidity_pct,
+        bee_count, audio_level_db, audio_freq_hz, state_code,
+        state_code_string, rssi, snr, gateway_id)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
             [
                 r.hiveId, r.receivedAt, r.fCnt, r.temperatureC, r.humidityPct,
-                r.beeCount, r.audioLevelDb, r.rssi, r.snr, r.gatewayId,
+                r.beeCount, r.audioLevelDb, r.audioFreqHz, r.stateCode,
+                r.stateCodeString, r.rssi, r.snr, r.gatewayId,
             ]
         );
 

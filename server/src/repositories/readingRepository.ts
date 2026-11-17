@@ -2,7 +2,8 @@ import { pool } from '../config/database.js';
 import type { Reading, ReadingFilters, ReadingRow } from '../types/reading.js';
 
 const COLUMNS = `reading_id, hive_id, received_at, f_cnt, temperature_c, humidity_pct,
-    bee_count, audio_level_db, audio_freq_hz, state_code, battery_mv, rssi, snr, gateway_id`;
+    bee_count, audio_level_db, audio_freq_hz, state_code, state_code_string,
+    battery_mv, rssi, snr, gateway_id`;
 
 // O driver devolve BIGINT como BigInt e DECIMAL como string, o que rebenta no JSON.stringify
 const num = (v: unknown): number | null => (v === null || v === undefined ? null : Number(v));
@@ -18,6 +19,7 @@ const toReading = (r: ReadingRow): Reading => ({
     audioLevelDb: num(r.audio_level_db),
     audioFreqHz: r.audio_freq_hz,
     stateCode: r.state_code,
+    stateCodeString: r.state_code_string,
     batteryMv: r.battery_mv,
     rssi: r.rssi,
     snr: num(r.snr),
