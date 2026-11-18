@@ -7,10 +7,28 @@ import {
 } from "../repositories/ttnRepository.js";
 import { InvalidPayloadError, processUplink } from "../services/ttnService.js";
 
+function serializeJsonValue(value: unknown): unknown {
+    if (typeof value === "bigint") {
+        return Number.isSafeInteger(Number(value)) ? Number(value) : value.toString();
+    }
+    if (Array.isArray(value)) {
+        return value.map(serializeJsonValue);
+    }
+    if (value && typeof value === "object") {
+        return Object.fromEntries(
+            Object.entries(value).map(([key, nestedValue]) => [
+                key,
+                serializeJsonValue(nestedValue),
+            ]),
+        );
+    }
+    return value;
+}
+
 export const listReadingHiveIds = async (_req: Request, res: Response) => {
     try {
         const hiveIds = await findHiveIdsWithReadings();
-        res.json({ hiveIds });
+        res.json(serializeJsonValue({ hiveIds }));
     } catch (error) {
         console.error("ttn - failed to fetch reading hive IDs:", error);
         res.status(500).json({ error: "failed to fetch reading hive IDs" });
@@ -33,7 +51,7 @@ export const listReadings = async (req: Request, res: Response) => {
 
     try {
         const readings = await findReadingsByHiveId(hiveId);
-        res.json({ readings });
+        res.json(serializeJsonValue({ readings }));
     } catch (error) {
         console.error("ttn - failed to fetch readings:", error);
         res.status(500).json({ error: "failed to fetch readings" });

@@ -7,15 +7,15 @@ export interface UserEntity {
 }
 
 interface UserRow {
-    id: number;
+    user_id: number;
     user_email: string;
-    user_password_hash: string;
+    user_password: string;
 }
 
 export class UserRepository {
     async findByEmail(email: string): Promise<UserEntity | null> {
         const rows = await pool.query<UserRow[]>(
-            'SELECT id, user_email, user_password_hash FROM users WHERE user_email = ?',
+            'SELECT user_id, user_email, user_password FROM users WHERE user_email = ?',
             [email]
         );
 
@@ -23,15 +23,15 @@ export class UserRepository {
         if (!row) return null;
 
         return {
-            id: row.id,
+            id: Number(row.user_id),
             email: row.user_email,
-            passwordHash: row.user_password_hash,
+            passwordHash: row.user_password,
         };
     }
 
     async create(email: string, passwordHash: string): Promise<{ id: number; email: string }> {
         const result = await pool.query<{ insertId: number }>(
-            'INSERT INTO users (user_email, user_password_hash) VALUES (?, ?)',
+            'INSERT INTO users (user_email, user_password) VALUES (?, ?)',
             [email, passwordHash]
         );
 

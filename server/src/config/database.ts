@@ -7,6 +7,9 @@ export const pool = mariadb.createPool({
     user: env.dbUser,
     password: env.dbPassword,
     database: env.dbName,
+    bigIntAsNumber: true,
+    decimalAsNumber: true,
+    insertIdAsNumber: true,
 });
 
 export default async function connectDatabase() {
