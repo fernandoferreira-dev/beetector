@@ -1,45 +1,38 @@
-function requiredEnv(name: string): string {
+function required(name: string): string {
     const value = process.env[name]?.trim();
-
-    if (!value) {
-        throw new Error(`Missing required environment variable: ${name}`);
-    }
-
+    if (!value) throw new Error(`Missing environment variable: ${name}`);
     return value;
 }
 
-function optionalEnv(name: string, fallback = ''): string {
+function optional(name: string, fallback = ''): string {
     return process.env[name]?.trim() || fallback;
 }
 
-function requiredPort(name: string): number {
-    const value = requiredEnv(name);
-    const port = Number(value);
-
-    if (!Number.isInteger(port) || port < 1 || port > 65535) {
-        throw new Error(`Invalid ${name}: expected an integer between 1 and 65535`);
+function port(name: string): number {
+    const value = Number(required(name));
+    if (!Number.isInteger(value) || value < 1 || value > 65535) {
+        throw new Error(`${name} must be a number between 1 and 65535`);
     }
-
-    return port;
+    return value;
 }
 
 export const env = {
-    serverPort: requiredPort('SERVER_PORT'),
-    clientUrl: requiredEnv('CLIENT_URL'),
-    sessionSecret: optionalEnv('SESSION_SECRET'),
+    serverPort: port('SERVER_PORT'),
+    clientUrl: required('CLIENT_URL'),
+    sessionSecret: optional('SESSION_SECRET'),
 
-    dbHost: requiredEnv('DB_HOST'),
-    dbPort: requiredPort('DB_PORT'),
-    dbUser: requiredEnv('DB_USER'),
-    dbPassword: requiredEnv('DB_PASSWORD'),
-    dbName: requiredEnv('DB_NAME'),
+    dbHost: required('DB_HOST'),
+    dbPort: port('DB_PORT'),
+    dbUser: required('DB_USER'),
+    dbPassword: required('DB_PASSWORD'),
+    dbName: required('DB_NAME'),
 
-    ttnAppId: requiredEnv('TTN_APP_ID'),
-    ttnEndDeviceId: requiredEnv('TTN_END_DEVICE_ID'),
-    ttnAccessKey: requiredEnv('TTN_ACCESS_KEY'),
-    ttnWebhookSecret: requiredEnv('TTN_WEBHOOK_SECRET'),
+    ttnAppId: required('TTN_APP_ID'),
+    ttnEndDeviceId: required('TTN_END_DEVICE_ID'),
+    ttnAccessKey: required('TTN_ACCESS_KEY'),
+    ttnWebhookSecret: required('TTN_WEBHOOK_SECRET'),
 
-    googleClientId: optionalEnv('GOOGLE_CLIENT_ID'),
-    googleClientSecret: optionalEnv('GOOGLE_CLIENT_SECRET'),
-    googleCallbackUrl: optionalEnv('GOOGLE_CALLBACK_URL'),
-} as const;
+    googleClientId: optional('GOOGLE_CLIENT_ID'),
+    googleClientSecret: optional('GOOGLE_CLIENT_SECRET'),
+    googleCallbackUrl: optional('GOOGLE_CALLBACK_URL'),
+};

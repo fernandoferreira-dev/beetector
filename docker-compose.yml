@@ -11,7 +11,9 @@ services:
       - "${SERVER_PORT}:3000"
     environment:
       - NODE_ENV=production
-      - PORT=3000
+      - SERVER_PORT=3000
+      - CLIENT_URL=${CLIENT_URL}
+      - SESSION_SECRET=${SESSION_SECRET}
       - DB_HOST=${DB_HOST}
       - DB_PORT=${DB_PORT}
       - DB_USER=${DB_USER}
@@ -21,6 +23,9 @@ services:
       - TTN_END_DEVICE_ID=${TTN_END_DEVICE_ID}
       - TTN_ACCESS_KEY=${TTN_ACCESS_KEY}
       - TTN_WEBHOOK_SECRET=${TTN_WEBHOOK_SECRET}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - GOOGLE_CALLBACK_URL=${GOOGLE_CALLBACK_URL}
     extra_hosts:
       - "host.docker.internal:host-gateway"
     networks:

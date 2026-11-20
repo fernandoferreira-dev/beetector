@@ -5,7 +5,7 @@ export interface UserEntity {
 }
 
 export interface UserRow {
-    id: number;
+    user_id: number;
     user_email: string;
-    user_password_hash: string;
+    user_password: string;
 }

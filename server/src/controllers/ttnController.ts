@@ -6,10 +6,12 @@ import { InvalidPayloadError, processUplink } from '../services/ttnService.js';
 function secretOk(received: string): boolean {
     const a = Buffer.from(received);
     const b = Buffer.from(env.ttnWebhookSecret);
+    // Além de comparar o segredo, evitamos uma comparação que revele o seu valor pelo tempo de resposta.
     return a.length === b.length && timingSafeEqual(a, b);
 }
 
 export const uplink = async (req: Request, res: Response) => {
+    // Só aceitamos mensagens do webhook configurado no TTN.
     if (!secretOk(req.header('x-webhook-secret') ?? '')) {
         res.status(401).json({ error: 'Unauthorized' });
         return;
@@ -21,7 +23,7 @@ export const uplink = async (req: Request, res: Response) => {
         const result = await processUplink(req.body);
 
         if (result === 'unknown_device') {
-            // 200 para o TTN não repetir o pedido
+            // O payload está correto, mas não conhecemos o dispositivo. O 200 evita um novo envio do TTN.
             res.status(200).json({ ignored: 'unknown device' });
             return;
         }

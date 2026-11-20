@@ -9,7 +9,6 @@ export interface ReadingRow {
     audio_level_db: string | number | null;
     audio_freq_hz: number | null;
     state_code: number | null;
-    state_code_string: string | null;
     battery_mv: number | null;
     rssi: number | null;
     snr: string | number | null;
@@ -27,7 +26,6 @@ export interface Reading {
     audioLevelDb: number | null;
     audioFreqHz: number | null;
     stateCode: number | null;
-    stateCodeString: string | null;
     batteryMv: number | null;
     rssi: number | null;
     snr: number | null;
@@ -52,7 +50,7 @@ export interface NewReading {
     audioLevelDb: number | null;
     audioFreqHz: number | null;
     stateCode: number | null;
-    stateCodeString: string | null;
+    batteryMv: number | null;
     rssi: number | null;
     snr: number | null;
     gatewayId: string | null;
