@@ -5,7 +5,7 @@ import { defineConfig } from 'vite'
 export default defineConfig({
     plugins: [vue()],
     build: {
-        outDir: path.resolve(__dirname, '../server/public'),
+        outDir: 'dist',
         emptyOutDir: true // Limpa a pasta antes de cada build
     }
 });

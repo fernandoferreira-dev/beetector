@@ -25,10 +25,19 @@ export const findHiveIdsWithReadings = async (): Promise<number[]> => {
 
 //função que retorna as readings de uma colmeia específica (hiveId), ordenadas da mais recente para a mais antiga
 export const findReadingsByHiveId = async (hiveId: number): Promise<ReadingRow[]> => {
-    return pool.query<ReadingRow[]>(
+    const rows = await pool.query<ReadingRow[]>(
         'SELECT * FROM readings WHERE hive_id = ? ORDER BY received_at DESC, reading_id DESC',
         [hiveId]
     );
+
+    return rows.map((row) => {
+        for (const [key, value] of Object.entries(row)) {
+            if (typeof value === 'bigint') {
+                row[key] = value.toString();
+            }
+        }
+        return row;
+    });
 };
 
 export const findHiveIdByDevEui = async (devEui: string): Promise<number | null> => {

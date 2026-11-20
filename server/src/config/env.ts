@@ -24,8 +24,8 @@ function requiredPort(name: string): number {
 }
 
 export const env = {
-    serverPort: requiredPort('SERVER_PORT'),
-    clientUrl: requiredEnv('CLIENT_URL'),
+    serverPort: requiredPort('PORT'),
+    //clientUrl: requiredEnv('CLIENT_URL'),
     sessionSecret: optionalEnv('SESSION_SECRET'),
 
     dbHost: requiredEnv('DB_HOST'),
