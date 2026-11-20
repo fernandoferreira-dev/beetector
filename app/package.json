@@ -33,12 +33,16 @@
     "vector-icons": "^0.1.0"
   },
   "devDependencies": {
+    "@iconify-icons/roentgen": "^2.0.2",
+    "@iconify-json/lucide": "^1.2.157",
+    "@iconify-json/mdi": "^1.2.3",
     "@types/react": "~19.3.0",
     "autoprefixer": "^10.6.2",
     "postcss": "^8.5.32",
     "react-native-svg-transformer": "^1.5.3",
     "tailwindcss": "^3.4.17",
-    "typescript": "~6.0.3"
+    "typescript": "~6.0.3",
+    "unplugin-icons": "^24.0.0"
   },
   "scripts": {
     "start": "expo start",
