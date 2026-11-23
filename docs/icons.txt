@@ -1,0 +1,14 @@
+roentgen:bee - pagina de apiarios 
+at-icons:map - pagina de mapa
+simple-icons:hive - uma colmeia para aparecer no mapa
+basil:user-solid - perfil 
+bxs:home - home page 
+akar-icons:info-fill
+andrsrxn:warning-triangle
+fluent-mdl2:status-error-full
+flat-color-icons:full-battery
+flat-color-icons:high-battery
+flat-color-icons:low-battery
+flat-color-icons:middle-battery
+
+
