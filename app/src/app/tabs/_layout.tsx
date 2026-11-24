@@ -1,11 +1,14 @@
-import AppTabs from "@/components/app-tabs";
-import AppHeader from "@/components/app-header";
+import { Slot } from 'expo-router';
+import { View } from 'react-native';
+
+import AppTabs from '@/components/app-tabs';
 
 export default function TabLayout() {
     return (
-        <>
-            <AppHeader />
+        <View className="flex-1 bg-[#faf9f6]">
+            <Slot />
             <AppTabs />
-        </>
+        </View>
     );
 }
+
