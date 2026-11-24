@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: api
+  config:
+    import:
+      - optional:file:../.env[.properties]
+      - optional:file:.env[.properties]
+  datasource:
+    url: jdbc:mariadb://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:beetector}
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:}
+    driver-class-name: org.mariadb.jdbc.Driver
+
+server:
+  port: ${SERVER_PORT:8080}

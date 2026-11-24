@@ -1,4 +1,4 @@
-package com.beetector.api.Models;
+package com.beetector.api.models;
 
 
 import jakarta.persistence.Entity;
@@ -19,7 +19,6 @@ public class Users {
     private int userId;
     private String userEmail;
     private String userPassword;
-    private String userFirstName;
-    private String userLastName;
+    private String userName;
     private Date userCreatedAt;
 }

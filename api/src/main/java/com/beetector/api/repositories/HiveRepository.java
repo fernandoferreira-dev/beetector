@@ -1,6 +1,6 @@
 package com.beetector.api.repositories;
 
-import com.beetector.api.Models.Hives;
+import com.beetector.api.models.Hives;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

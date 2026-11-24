@@ -1,6 +1,6 @@
 package com.beetector.api.services;
 
-import com.beetector.api.Models.Hives;
+import com.beetector.api.models.Hives;
 import com.beetector.api.exceptions.UserNotFoundException;
 import com.beetector.api.repositories.HiveRepository;
 import com.beetector.api.repositories.UserRepository;

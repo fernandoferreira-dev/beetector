@@ -1,4 +1,4 @@
-package com.beetector.api.Models;
+package com.beetector.api.models;
 
 
 import jakarta.persistence.*;
@@ -21,13 +21,13 @@ public class Hives {
     private int paymentId;
     private int userId;
     private Integer apiaryId;
-    private Integer gatewayId; // Change to Int later
+    private Integer gatewayId; // FIXME Change to Int when pallet stops sending null
     private String hiveName;
     private String hiveSerial;
     private String c6Id;
     private double hiveLat;
     private double hiveLon;
-    private Integer batteryPercentage; // Change to Int later
+    private Integer batteryPercentage; // FIXME Change to Int when pallet stops sending null
     private Date hiveActivatedAt;
     private boolean favorite;
 }
