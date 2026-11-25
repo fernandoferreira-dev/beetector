@@ -28,9 +28,10 @@ export async function login(req: Request, res: Response): Promise<void> {
             return;
         }
 
+        const authentication = await loginUser(email, password);
         res.status(200).json({
             message: 'Login successful',
-            user: await loginUser(email, password),
+            ...authentication,
         });
     } catch (error) {
         if (error instanceof AuthError) {

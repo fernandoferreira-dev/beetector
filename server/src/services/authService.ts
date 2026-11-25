@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import { createUser, findUserByEmail } from '../repositories/userRepository.js';
+import { createAccessToken } from './accessTokenService.js';
 
 export class AuthError extends Error {
     constructor(message: string, public statusCode: number) {
@@ -22,5 +23,9 @@ export async function loginUser(email: string, password: string) {
     const passwordMatches = await bcrypt.compare(password, user.passwordHash);
     if (!passwordMatches) throw new AuthError('Invalid credentials', 401);
 
-    return { id: user.id, email: user.email };
+    const authenticatedUser = { id: user.id, email: user.email };
+    return {
+        user: authenticatedUser,
+        accessToken: createAccessToken(authenticatedUser),
+    };
 }

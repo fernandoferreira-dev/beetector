@@ -8,6 +8,14 @@ function optional(name: string, fallback = ''): string {
     return process.env[name]?.trim() || fallback;
 }
 
+function secret(name: string): string {
+    const value = required(name);
+    if (Buffer.byteLength(value, 'utf8') < 32) {
+        throw new Error(`${name} must be at least 32 bytes`);
+    }
+    return value;
+}
+
 function port(name: string): number {
     const value = Number(required(name));
     if (!Number.isInteger(value) || value < 1 || value > 65535) {
@@ -19,7 +27,7 @@ function port(name: string): number {
 export const env = {
     serverPort: port('SERVER_PORT'),
     clientUrl: required('CLIENT_URL'),
-    sessionSecret: optional('SESSION_SECRET'),
+    sessionSecret: secret('SESSION_SECRET'),
 
     dbHost: required('DB_HOST'),
     dbPort: port('DB_PORT'),
