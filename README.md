@@ -74,9 +74,3 @@
 ├── docker-compose.yml
 └── README.md
 ```
-
-## Autores
-
-* Diogo Rocha
-* Fernando Ferreira
-* Jaime Quaresma 
