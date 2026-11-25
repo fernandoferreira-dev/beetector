@@ -1,6 +1,6 @@
 package com.beetector.api.services;
 
-import com.beetector.api.models.Hives;
+import com.beetector.api.dtos.response.HiveResponse;
 import com.beetector.api.exceptions.UserNotFoundException;
 import com.beetector.api.repositories.HiveRepository;
 import com.beetector.api.repositories.UserRepository;
@@ -19,7 +19,7 @@ public class HiveService {
         this.userRepository = userRepository;
     }
 
-    public List<Hives> getUserHives (Integer userId) {
+    public List<HiveResponse> getUserHives (Integer userId) {
 
         if (!userRepository.existsByUserId(userId)){
             throw  new UserNotFoundException(String.valueOf(userId));
@@ -28,7 +28,7 @@ public class HiveService {
         return hiveRepository.findByUserId(userId);
     }
 
-    public List<Hives> getUserFavoritedHives (Integer userId) {
+    public List<HiveResponse> getUserFavoritedHives (Integer userId) {
         if (!userRepository.existsByUserId(userId)){
             throw  new UserNotFoundException(String.valueOf(userId));
         }

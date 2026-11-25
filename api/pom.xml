@@ -92,6 +92,13 @@
             <version>3.2.1</version>
         </dependency>
 
+        <!-- Source: https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>7.2.0</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
