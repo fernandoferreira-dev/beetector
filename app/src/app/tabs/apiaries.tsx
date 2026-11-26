@@ -98,17 +98,15 @@ function FilterChip({
   return (
     <Pressable
       onPress={onPress}
-      className={`flex-row items-center rounded-full px-3 py-1.5 mr-2 shrink-0 ${
-        selected ? "bg-[#F59E0B]" : "bg-white"
-      }`}
+      className={`flex-row items-center rounded-full px-3 py-1.5 mr-2 shrink-0 ${selected ? "bg-[#F59E0B]" : "bg-white"
+        }`}
     >
       {dotClass ? (
         <View className={`h-2.5 w-2.5 rounded-full mr-1.5 ${dotClass}`} />
       ) : null}
       <Text
-        className={`text-sm font-semibold ${
-          selected ? "text-white" : "text-black"
-        }`}
+        className={`text-sm font-semibold ${selected ? "text-white" : "text-black"
+          }`}
       >
         {label}
       </Text>
@@ -161,9 +159,8 @@ function ApiaryCard({
 }) {
   return (
     <View
-      className={`bg-white rounded-xl mb-4 overflow-hidden ${
-        expanded ? "border border-gray-400" : ""
-      }`}
+      className={`bg-white rounded-xl mb-4 overflow-hidden ${expanded ? "border border-gray-400" : ""
+        }`}
     >
       <View className="flex-row items-center p-3">
         <View className="h-14 w-14 rounded-xl bg-[#FFF4D6] border border-[#F5C26B] items-center justify-center mr-3">
@@ -186,7 +183,7 @@ function ApiaryCard({
           <AppIcon icon={PencilIcon} size={22} color="#6B7280" />
         </Pressable>
         <Pressable onPress={onToggle} hitSlop={8}>
-          <AppIcon icon={BeeIcon} size={22} color="#6B7280" />
+          <Text className="text-gray-500 -rotate-90 text-xl">&lt;</Text>
         </Pressable>
       </View>
 
