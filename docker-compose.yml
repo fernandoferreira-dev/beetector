@@ -12,4 +12,6 @@ services:
       - "host.docker.internal:host-gateway"
     environment:
       - SPRING_PROFILES_ACTIVE=prod
+    labels:
+      swagger: "http://localhost:8080/swagger-ui/index.html"
     restart: unless-stopped
