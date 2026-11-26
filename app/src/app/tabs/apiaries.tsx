@@ -17,7 +17,6 @@ import BeeIcon from "@iconify-icons/roentgen/bee";
 
 import { AppIcon } from "@/components/utilities/AppIcon";
 
-// isto é tudo placeholder
 type HiveStatus = "alarm" | "calm" | "active";
 
 type Hive = {
@@ -38,6 +37,7 @@ type Apiary = {
   hives: Hive[];
 };
 
+// isto é tudo placeholder
 const PLACEHOLDER_APIARIES: Apiary[] = [
   {
     id: "apiary-1",
