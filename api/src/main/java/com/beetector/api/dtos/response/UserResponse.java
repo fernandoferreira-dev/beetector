@@ -12,7 +12,7 @@ public record UserResponse(
 ) {
     public static UserResponse fromEntity(Users users){
         return new UserResponse(
-                users.getUserName(),
+                users.getUsername() ,
                 users.getUserEmail(),
                 users.getUserCreatedAt()
         );
