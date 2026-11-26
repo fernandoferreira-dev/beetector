@@ -5,6 +5,12 @@
   "dependencies": {
     "@expo/ui": "~58.0.25",
     "@expo/vector-icons": "^15.0.2",
+    "@iconify-icons/at-icons": "^2.0.3",
+    "@iconify-icons/basil": "^2.0.0",
+    "@iconify-icons/bxs": "^2.0.0",
+    "@iconify-icons/mdi": "^2.0.0",
+    "@iconify-icons/roentgen": "^2.0.2",
+    "@iconify-react/material-symbols-light": "gitlab:iconify-icons/react#material-symbols-light",
     "expo": "~58.0.21",
     "expo-constants": "~58.0.14",
     "expo-device": "~58.0.5",
@@ -33,7 +39,6 @@
     "vector-icons": "^0.1.0"
   },
   "devDependencies": {
-    "@iconify-icons/roentgen": "^2.0.2",
     "@iconify-json/lucide": "^1.2.157",
     "@iconify-json/mdi": "^1.2.3",
     "@types/react": "~19.3.0",

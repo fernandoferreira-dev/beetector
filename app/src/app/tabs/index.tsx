@@ -5,7 +5,7 @@ import BeeIcon from "../../../assets/images/hiveStatus.svg";
 
 export default function HomeScreen() {
     return (
-        <SafeAreaView className="flex-1 bg-[#faf9f6] px-5">
+        <SafeAreaView edges={['left', 'right']} className="flex-1 bg-[#faf9f6] px-5">
             <View className="flex-1 items-center justify-top size-100">
                 <View className="relative">
                     <BeeIcon width={220} height={213} />
