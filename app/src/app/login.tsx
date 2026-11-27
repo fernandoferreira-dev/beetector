@@ -53,7 +53,7 @@ export default function LoginScreen() {
 
         const apiUrl = process.env.EXPO_PUBLIC_API_URL?.trim().replace(/\/+$/, '');
         if (!apiUrl) {
-            console.log('O URL da API não está configurada.');
+            setError('O URL da API não está configurado.');
             return;
         }
 
@@ -63,7 +63,7 @@ export default function LoginScreen() {
         try {
             let response: Response;
             try {
-                response = await fetch(`${apiUrl}/api/auth/login`, {
+                response = await fetch(`${apiUrl}/api/auth/sign-in`, {
                     method: 'POST',
                     headers: {
                         Accept: 'application/json',
@@ -72,7 +72,7 @@ export default function LoginScreen() {
                     body: JSON.stringify({ email: normalizedEmail, password }),
                 });
             } catch {
-                console.log('Não foi possível contactar o servidor. Verifica a ligação e tenta novamente.');
+                setError('Não foi possível contactar o servidor. Verifica a ligação e tenta novamente.');
                 return;
             }
 
