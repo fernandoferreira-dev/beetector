@@ -1,1 +1,46 @@
-<p>login works!</p>
+<div class="flex min-h-screen flex-col bg-[#fffdd0]/20">
+    <main
+        class="grid flex-1 grid-cols-1 grid-rows-[minmax(0,1fr)_minmax(12rem,40vh)] min-[701px]:grid-cols-2 min-[701px]:grid-rows-none">
+        <section
+            class="mx-auto my-14 flex w-full max-w-sm flex-col self-center rounded-lg border border-solid border-gray-300 p-6 min-[701px]:my-20 bg-white p-6">
+            <div class="flex items-center justify-center gap-3">
+                <img class="z-10 w-14 max-w-none" src="/assets/images/bee.svg" alt="Abelha Beetector">
+                <h1 class="-mt-4 z-0 text-4xl font-bold">Beetector</h1>
+            </div>
+            <form id="form_login" class="mt-4 flex w-full max-w-sm flex-col gap-3 self-center"
+                (ngSubmit)="login()">
+                <h2 class="text-2xl font-bold">Login</h2>
+                <label for="email" class="m-0">Email</label>
+                <input id="email" name="userEmail" [(ngModel)]="userEmail"
+                    class="box-border w-full rounded border border-gray-300 p-3" type="email"
+                    autocomplete="username" required placeholder="Escreva o seu email...">
+                <label for="password" class="m-0">Password</label>
+                <div class="relative">
+                    <input id="password" name="userPassword" [(ngModel)]="userPassword"
+                        class="box-border w-full rounded border border-gray-300 p-3 pr-10"
+                        [type]="passwordVisible ? 'text' : 'password'" autocomplete="current-password"
+                        required placeholder="Escreva a sua password...">
+                    <button id="toggle-password" type="button" class="absolute inset-y-0 right-0 flex items-center px-3"
+                        (click)="togglePasswordVisibility()"
+                        [attr.aria-label]="passwordVisible ? 'Ocultar palavra-passe' : 'Mostrar palavra-passe'"
+                        [attr.aria-pressed]="passwordVisible">
+                        <img class="h-5 w-5"
+                            [src]="passwordVisible ? '/assets/images/visible.svg' : '/assets/images/hidden.svg'" alt="">
+                    </button>
+                </div>
+                <p class="text-sm text-red-600" role="alert" aria-live="assertive"
+                    [hidden]="!errorMessage">{{ errorMessage }}</p>
+                <button type="submit" [disabled]="isSubmitting"
+                    class="mt-4 rounded bg-[#F59E0B] p-3 text-white hover:bg-[#EC9706] disabled:opacity-60">
+                    Entrar
+                </button>
+            </form>
+        </section>
+        <aside class="flex items-center justify-center bg-[#f3f5f2] p-8" aria-label="Ilustração">
+        </aside>
+    </main>
+
+    <footer class="p-4 text-center">
+        <p class="m-0">© 2026 Diogo Rocha - Fernando Ferreira - Jaime Quaresma</p>
+    </footer>
+</div>
