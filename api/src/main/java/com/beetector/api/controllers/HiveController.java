@@ -1,6 +1,6 @@
 package com.beetector.api.controllers;
 
-import com.beetector.api.models.Hives;
+import com.beetector.api.dtos.response.HiveResponse;
 import com.beetector.api.config.ApiController;
 import com.beetector.api.services.HiveService;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +17,12 @@ public class HiveController implements ApiController {
     }
 
     @GetMapping
-    public List<Hives> getUserHives(@PathVariable("userId") int userId) {
+    public List<HiveResponse> getUserHives(@PathVariable("userId") int userId) {
         return hiveService.getUserHives(userId);
     }
 
     @GetMapping("/favourites")
-    public List<Hives> getUserFavorited(@PathVariable("userId") int userId) {
+    public List<HiveResponse> getUserFavorited(@PathVariable("userId") int userId) {
         return hiveService.getUserFavoritedHives(userId);
     }
 }
