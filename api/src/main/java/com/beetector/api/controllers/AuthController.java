@@ -17,11 +17,13 @@ public class AuthController implements ApiController {
     }
 
     @PostMapping("/sign-in")
-    public ResponseEntity<String> signIn(){
-        // TODO User log-in
-        return ResponseEntity.ok("User signed-in sucessfuly.");
-    }
+    public ResponseEntity signIn(@RequestBody @Valid SignInRequest request){
+        var useremailPassword = new UsernamePasswordAuthenticationToken(request.userEmail(), request.userPassword());
+        var auth = this.authenticationManager.authenticate(useremailPassword);
 
+        return ResponseEntity.ok().build();
+    }
+    
     @PostMapping("/sign-out")
     public ResponseEntity<String> signOut(){
         // TODO User log-out (must destroy token)
