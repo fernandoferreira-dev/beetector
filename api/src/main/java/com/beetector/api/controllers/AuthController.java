@@ -3,10 +3,13 @@ package com.beetector.api.controllers;
 import com.beetector.api.config.ApiController;
 import com.beetector.api.dtos.request.SignInRequest;
 import com.beetector.api.dtos.request.SignUpRequest;
+import com.beetector.api.dtos.response.SignInResponse;
+import com.beetector.api.models.Users;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,11 +31,12 @@ public class AuthController implements ApiController {
     }
 
     @PostMapping("/sign-in")
-    public ResponseEntity signIn(@RequestBody @Valid SignInRequest request){
-        var useremailPassword = new UsernamePasswordAuthenticationToken(request.userEmail(), request.userPassword());
-        var auth = this.authenticationManager.authenticate(useremailPassword);
+    public ResponseEntity<SignInResponse> signIn(@RequestBody @Valid SignInRequest request){
+        Authentication authentication = this.authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(request.userEmail(), request.userPassword()));
+        Users user = (Users) authentication.getPrincipal();
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(SignInResponse.fromEntity(user));
     }
     
     @PostMapping("/sign-out")
@@ -40,4 +44,4 @@ public class AuthController implements ApiController {
         // TODO User log-out (must destroy token)
         return ResponseEntity.ok("User signed-out sucessfuly.");
     }
-
+}

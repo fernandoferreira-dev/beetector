@@ -46,8 +46,8 @@ export default function LoginScreen() {
 
     async function handleLogin() {
         const normalizedEmail = email.trim();
-        if (!normalizedEmail.includes('@') || password.length < 6) {
-            setError('Email inválido ou password com menos de 6 caracteres.');
+        if (!normalizedEmail.includes('@') || password.length < 8) {
+            setError('Email inválido ou password com menos de 8 caracteres.');
             return;
         }
 
@@ -69,7 +69,7 @@ export default function LoginScreen() {
                         Accept: 'application/json',
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ email: normalizedEmail, password }),
+                    body: JSON.stringify({ userEmail: normalizedEmail, userPassword: password }),
                 });
             } catch {
                 setError('Não foi possível contactar o servidor. Verifica a ligação e tenta novamente.');
@@ -82,7 +82,7 @@ export default function LoginScreen() {
                 try {
                     responseBody = JSON.parse(responseText) as unknown;
                 } catch {
-                    throw new Error('O servidor devolveu uma resposta inválida.');
+                    throw new Error(`O servidor devolveu uma resposta inválida. ${responseText}`);
                 }
             }
 
